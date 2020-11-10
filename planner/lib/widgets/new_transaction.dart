@@ -16,14 +16,17 @@ class _NewTranactionState extends State<NewTranaction> {
   DateTime _selectedDate;
 
   void _submitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
     final String enteredTitle = _titleController.text;
     final double enterdAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enterdAmount <= 0) {
+    if (enteredTitle.isEmpty || enterdAmount <= 0 || _selectedDate == null) {
       return;
     }
 
-    widget.addTrx(enteredTitle, enterdAmount);
+    widget.addTrx(enteredTitle, enterdAmount, _selectedDate);
     Navigator.of(context).pop();
   }
 
